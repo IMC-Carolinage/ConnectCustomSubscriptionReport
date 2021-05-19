@@ -108,9 +108,7 @@ def client_factory():
                 end = 0 if count == 0 else count - 1
                 mock_kwargs['status'] = 200
                 mock_kwargs['json'] = res.value
-                mock_kwargs['headers'] = {
-                    'Content-Range': f'items 0-{end}/{count}'
-                }
+                mock_kwargs['headers'] = {'Content-Range': f'items 0-{end}/{count}'}
             elif isinstance(res.value, dict):
                 mock_kwargs['status'] = res.status or 200
                 mock_kwargs['json'] = res.value
