@@ -109,7 +109,7 @@ def client_factory():
                 mock_kwargs['status'] = 200
                 mock_kwargs['json'] = res.value
                 mock_kwargs['headers'] = {
-                    'Content-Range': f'items 0-{end}/{count}'
+                    'Content-Range': f"items 0-{end}/{count}"
                 }
             elif isinstance(res.value, dict):
                 mock_kwargs['status'] = res.status or 200
