@@ -33,6 +33,7 @@ class Progress:
     def __init__(self, callback, total):
         self.lock = Lock()
         self.current = 0
+        
         self.total = total
         self.callback = callback
 
