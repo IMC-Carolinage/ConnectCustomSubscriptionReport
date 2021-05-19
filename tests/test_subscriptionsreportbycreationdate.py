@@ -8,60 +8,103 @@ from subscription_report.subscriptions_by_creation_date.entrypoint import genera
 
 
 def test_subscriptions_by_creation_date(progress, client_factory, response_factory):
-    """
-    Test dataset generation.
-    To mock http calls, you must create the list of responses
-    for each client call.
-
-    Ex:
-    ```
-
     responses = []
-    # create a response for a count call
 
-    responses.append(response_factory(count=100))
-
-    # create response for a collection
-
-    responses.append(response_factory(value=[
-        {
-            'id': 'OBJ-001',
-            ....
+    parameters = {
+        "date": {
+            "after": "2020-12-01T00:00:00",
+            "before": "2021-01-01T00:00:00",
         },
-        {
-            'id': 'OBJ-002',
-            ....
+        "product": {
+            "all": True,
+            "choices": [],
         },
-    ]))
+        "rr_status": {
+            "all": True,
+            "choices": [],
+        },
+        "rr_type": {
+            "all": True,
+            "choices": [],
+        },
+        "mkp": {
+            "all": True,
+            "choices": [],
+        },
+        "hub": {
+            "all": True,
+            "choices": [],
+        },
+    }
+    responses.append(
+        response_factory(
+            count=1,
+        ),
+    )
 
-    # create a response that raises an Exception
-
-    responses.append(response_factory(exception=Exception('my_exception')))
-
-    # create a response that returns a http 404
-
-    responses.append(response_factory(status=404))
-
-    # create a response and pass an RQL query, ordering and select
-    # to check that it match
-
-    responses.append(response_factory(
-        query='in(status,(approved,rejected))',
-        ordering=['-created'],
-        select=['asset'],
-        value=[],
-    ))
-
-    # create a client instance
+    responses.append(
+        response_factory(
+            query='and(ge(created,2020-12-01T00:00:00),le(created,2021-01-01T00:00:00),in(status,'
+                  '(tiers_setup,inquiring,pending,approved,failed,draft)))',
+        ),
+    )
 
     client = client_factory(responses)
 
-    :param progress: MagicMock to use as progress_callback
-    :type mocker: MagicMock
-    :param client_factory: Function that returns an instance of ConnectClient
-    :type client_factory: func
-    :param response_factory: Function that creates ConnectClient reponses.
-    :type response_factory: func
-    """
+    result = list(generate(client, parameters, progress))
 
-    pass
+    assert len(result) == 18
+
+
+def test_generate_additional(progress, client_factory, response_factory, ff_request):
+    responses = []
+
+    parameters = {
+        "date": {
+            "after": "2020-12-01T00:00:00",
+            "before": "2021-01-01T00:00:00",
+        },
+        "product": {
+            "all": False,
+            "choices": [
+                "PRD-276-377-545",
+            ],
+        },
+        "rr_status": {
+            "all": False,
+            "choices": ['approved'],
+        },
+        "rr_type": {
+            "all": False,
+            "choices": ['purchase'],
+        },
+        "mkp": {
+            "all": False,
+            "choices": ['MP-123'],
+        },
+        "hub": {
+            "all": False,
+            "choices": ['HB-123'],
+        },
+    }
+    responses.append(
+        response_factory(
+            count=1,
+        ),
+    )
+
+    responses.append(
+        response_factory(
+            query='and(ge(created,2020-12-01T00:00:00),le(created,2021-01-01T00:00:00),'
+                  'in(asset.product.id,(PRD-276-377-545)),in(type,(purchase)),in(status,'
+                  '(approved)),in(asset.marketplace.id,(MP-123)),in(asset.connection.hub.id,'
+                  '(HB-123)))',
+            value=[ff_request],
+        ),
+    )
+
+    client = client_factory(responses)
+
+    result = list(generate(client, parameters, progress))
+
+    assert len(result) == 18
