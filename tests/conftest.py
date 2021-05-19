@@ -145,7 +145,6 @@ def ff_request():
             os.path.join(
                 os.getcwd(),
                 'tests',
-                'fixtures',
                 'ff_request.json',
             ),
     ) as request:
