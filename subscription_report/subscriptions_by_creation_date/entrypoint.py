@@ -103,5 +103,7 @@ def _get_requests(client, parameters):
         query &= R().status.oneof(all_types)
     if parameters.get('mkp') and parameters['mkp']['all'] is False:
         query &= R().asset.marketplace.id.oneof(parameters['mkp']['choices'])
+    else:
+        query &= R().asset.marketplace.id.oneof(all_types)
 
     return client.requests.filter(query)
