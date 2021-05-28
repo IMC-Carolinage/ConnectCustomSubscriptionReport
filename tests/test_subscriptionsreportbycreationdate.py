@@ -7,7 +7,7 @@
 from subscription_report.subscriptions_by_creation_date.entrypoint import generate
 
 
-def test_subscriptions_by_creation_date(progress, client_factory, response_factory):
+def test_subscriptions_by_creation_date(progress, client_factory, response_factory, ff_request):
     responses = []
 
     parameters = {
