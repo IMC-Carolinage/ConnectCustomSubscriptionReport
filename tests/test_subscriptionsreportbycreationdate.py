@@ -68,7 +68,7 @@ def test_generate_additional(progress, client_factory, response_factory, ff_requ
         },
         "mkp": {
             "all": False,
-            "choices": ['MP-123'],
+            "choices": ['MP-91673'],
         },
     }
     responses.append(
