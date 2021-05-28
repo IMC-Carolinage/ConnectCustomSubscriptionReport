@@ -38,6 +38,7 @@ def test_subscriptions_by_creation_date(progress, client_factory, response_facto
         response_factory(
             query='and(ge(created,2021-01-01T00:00:00),le(created,2021-12-01T00:00:00),in(status,'
                   '(tiers_setup,inquiring,pending,approved,failed,draft)))',
+            value=[ff_request],
         ),
     )
 
