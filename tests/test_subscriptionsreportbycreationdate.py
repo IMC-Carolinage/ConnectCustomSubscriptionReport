@@ -26,7 +26,7 @@ def test_subscriptions_by_creation_date(progress, client_factory, response_facto
         "mkp": {
             "all": True,
             "choices": [],
-        }
+        },
     }
     responses.append(
         response_factory(
@@ -54,7 +54,7 @@ def test_generate_additional(progress, client_factory, response_factory, ff_requ
     parameters = {
         "date": {
             "after": "2021-01-01T00:00:00",
-            "before": "2021-12-01T00:00:00"
+            "before": "2021-12-01T00:00:00",
         },
         "product": {
             "all": False,
@@ -69,7 +69,7 @@ def test_generate_additional(progress, client_factory, response_factory, ff_requ
         "mkp": {
             "all": False,
             "choices": ['MP-123'],
-        }
+        },
     }
     responses.append(
         response_factory(
