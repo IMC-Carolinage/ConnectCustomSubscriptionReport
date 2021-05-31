@@ -83,8 +83,9 @@ def generate(client, parameters, progress_callback):
                         ),
                         today_str(),
                     )
-             progress += 1
-             progress_callback(progress, total)
+                    
+        progress += 1
+        progress_callback(progress, total)
 
 
 def _get_requests(client, parameters):
