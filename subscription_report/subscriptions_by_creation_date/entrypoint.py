@@ -37,7 +37,7 @@ def generate(client, parameters, progress_callback):
         reconciliation_param_value = ''
 
         for param in request['asset']['params']:
-            if get_value(param, 'constraints', 'reconciliation') == 'true':
+            if get_value(param, 'constraints', 'reconciliation'):
                 reconciliation_param_value = get_basic_value(param, 'value')
 
         if get_value(request['asset'], 'connection', 'type') == 'production':
