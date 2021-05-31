@@ -44,46 +44,46 @@ def generate(client, parameters, progress_callback):
             for item in request['asset']['items']:
                 if get_basic_value(item, 'item_type') == 'PPU' \
                         or get_basic_value(item, 'quantity') == 0:
-
-                yield (
-                    get_basic_value(request, 'id'),
-                    get_basic_value(request, 'type'),
-                    get_value(request, 'asset', 'id'),
-                    get_value(request, 'asset', 'external_id'),
-                    reconciliation_param_value,
-                    get_basic_value(item, 'global_id'),
-                    get_basic_value(item, 'display_name'),
-                    get_basic_value(item, 'item_type'),
-                    get_basic_value(item, 'type'),
-                    get_basic_value(item, 'mpn'),
-                    get_basic_value(item, 'period'),
-                    get_basic_value(item, 'quantity'),
-                    get_value(request['asset']['tiers'], 'customer', 'id'),
-                    get_value(request['asset']['tiers'], 'customer', 'name'),
-                    get_value(request['asset']['tiers'], 'customer', 'external_id'),
-                    get_value(request['asset']['tiers'], 'tier1', 'id'),
-                    get_value(request['asset']['tiers'], 'tier1', 'name'),
-                    get_value(request['asset']['tiers'], 'tier1', 'external_id'),
-                    get_value(request['asset']['tiers'], 'tier2', 'id'),
-                    get_value(request['asset']['tiers'], 'tier2', 'name'),
-                    get_value(request['asset']['tiers'], 'tier2', 'external_id'),
-                    get_value(request['asset']['connection'], 'provider', 'id'),
-                    get_value(request['asset']['connection'], 'provider', 'name'),
-                    get_value(request['asset'], 'marketplace', 'name'),
-                    get_value(request['asset'], 'product', 'id'),
-                    get_value(request['asset'], 'product', 'name'),
-                    get_value(request['asset'], 'connection', 'type'),
-                    get_value(request, 'asset', 'status'),
-                    convert_to_datetime(
-                        get_basic_value(request, 'created'),
-                    ),
-                    convert_to_datetime(
-                        get_basic_value(request, 'updated'),
-                    ),
-                    today_str(),
-                )
-            progress += 1
-            progress_callback(progress, total)
+                else
+                    yield (
+                        get_basic_value(request, 'id'),
+                        get_basic_value(request, 'type'),
+                        get_value(request, 'asset', 'id'),
+                        get_value(request, 'asset', 'external_id'),
+                        reconciliation_param_value,
+                        get_basic_value(item, 'global_id'),
+                        get_basic_value(item, 'display_name'),
+                        get_basic_value(item, 'item_type'),
+                        get_basic_value(item, 'type'),
+                        get_basic_value(item, 'mpn'),
+                        get_basic_value(item, 'period'),
+                        get_basic_value(item, 'quantity'),
+                        get_value(request['asset']['tiers'], 'customer', 'id'),
+                        get_value(request['asset']['tiers'], 'customer', 'name'),
+                        get_value(request['asset']['tiers'], 'customer', 'external_id'),
+                        get_value(request['asset']['tiers'], 'tier1', 'id'),
+                        get_value(request['asset']['tiers'], 'tier1', 'name'),
+                        get_value(request['asset']['tiers'], 'tier1', 'external_id'),
+                        get_value(request['asset']['tiers'], 'tier2', 'id'),
+                        get_value(request['asset']['tiers'], 'tier2', 'name'),
+                        get_value(request['asset']['tiers'], 'tier2', 'external_id'),
+                        get_value(request['asset']['connection'], 'provider', 'id'),
+                        get_value(request['asset']['connection'], 'provider', 'name'),
+                        get_value(request['asset'], 'marketplace', 'name'),
+                        get_value(request['asset'], 'product', 'id'),
+                        get_value(request['asset'], 'product', 'name'),
+                        get_value(request['asset'], 'connection', 'type'),
+                        get_value(request, 'asset', 'status'),
+                        convert_to_datetime(
+                            get_basic_value(request, 'created'),
+                        ),
+                        convert_to_datetime(
+                            get_basic_value(request, 'updated'),
+                        ),
+                        today_str(),
+                    )
+             progress += 1
+             progress_callback(progress, total)
 
 
 def _get_requests(client, parameters):
