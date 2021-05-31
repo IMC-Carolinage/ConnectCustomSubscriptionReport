@@ -45,13 +45,9 @@ def generate(client, parameters, progress_callback):
                 yield (
                     get_basic_value(request, 'id'),
                     get_basic_value(request, 'type'),
-                    convert_to_datetime(
-                        get_basic_value(request, 'created'),
-                    ),
-                    convert_to_datetime(
-                        get_basic_value(request, 'updated'),
-                    ),
-                    today_str(),
+                    get_value(request, 'asset', 'id'),
+                    get_value(request, 'asset', 'external_id'),
+                    reconciliation_param_value,
                     get_basic_value(item, 'global_id'),
                     get_basic_value(item, 'display_name'),
                     get_basic_value(item, 'item_type'),
@@ -73,11 +69,15 @@ def generate(client, parameters, progress_callback):
                     get_value(request['asset'], 'marketplace', 'name'),
                     get_value(request['asset'], 'product', 'id'),
                     get_value(request['asset'], 'product', 'name'),
-                    get_value(request, 'asset', 'id'),
-                    get_value(request, 'asset', 'external_id'),
-                    reconciliation_param_value,
                     get_value(request['asset'], 'connection', 'type'),
                     get_value(request, 'asset', 'status'),
+                    convert_to_datetime(
+                        get_basic_value(request, 'created'),
+                    ),
+                    convert_to_datetime(
+                        get_basic_value(request, 'updated'),
+                    ),
+                    today_str(),
                 )
             progress += 1
             progress_callback(progress, total)
