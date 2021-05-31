@@ -44,7 +44,8 @@ def generate(client, parameters, progress_callback):
             for item in request['asset']['items']:
                 if get_basic_value(item, 'item_type') == 'PPU' \
                         or get_basic_value(item, 'quantity') == 0:
-                else
+                    continue
+                else:
                     yield (
                         get_basic_value(request, 'id'),
                         get_basic_value(request, 'type'),
