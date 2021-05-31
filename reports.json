@@ -6,7 +6,7 @@
    "reports":[
       {
          "name":"Subscriptions by creation date",
-         "readme_file":"subscription_report/subscriptions_by_creation_date/README.md",
+         "readme_file":"subscription_report/subscriptions_by_creation_date/Readme.md",
          "template":"subscription_report/subscriptions_by_creation_date/template.xlsx",
          "start_row":2,
          "start_col":1,

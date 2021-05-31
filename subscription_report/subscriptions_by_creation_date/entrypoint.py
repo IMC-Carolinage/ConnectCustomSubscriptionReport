@@ -38,7 +38,7 @@ def generate(client, parameters, progress_callback):
         reconciliation_param_value = ''
 
         for param in request['asset']['params']:
-            if param['reconciliation']:
+            if get_basic_value(param, 'reconciliation'):
                 reconciliation_param_value = get_basic_value(param, 'value')
 
         for item in request['asset']['items']:
