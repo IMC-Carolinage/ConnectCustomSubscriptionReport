@@ -82,7 +82,7 @@ def generate(client, parameters, progress_callback):
                             get_basic_value(request, 'updated'),
                         ),
                         today_str(),
-                    )            
+                    )
         progress += 1
         progress_callback(progress, total)
 
