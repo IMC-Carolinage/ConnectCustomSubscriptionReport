@@ -42,8 +42,8 @@ def generate(client, parameters, progress_callback):
 
         if get_value(request['asset'], 'connection', 'type') == 'production':
             for item in request['asset']['items']:
-                if get_basic_value(item, 'item_type') == 'PPU' \
-                        or get_basic_value(item, 'quantity') == 0:
+                if get_basic_value(item, 'item_type') == 'PPU' or \
+                        get_basic_value(item, 'quantity') == 0:
                     continue
                 else:
                     yield (
