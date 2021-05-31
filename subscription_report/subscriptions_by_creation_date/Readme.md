@@ -1,12 +1,16 @@
-# Report Subscriptions By Creation Date
+# Report: Subscriptions details by requests creation date
 
 
-Al the subscription items data, parameters and tiers for reconciliation.
+Given the request creation date period, it creates the report with the subscriptions and requests data for reconciliation.
 
+It takes only Production environment requests, of reservation items.
 
-# Available parameters
+# Filtering Parameters
 
-Subscriptions By Creation Date can be parametrized by:
+This report can be parametrized by:
 
-* Start date
-* End date
+* Request creation date (from-to)
+* Type or request
+* Status of the request
+* Product
+* Marketplace
