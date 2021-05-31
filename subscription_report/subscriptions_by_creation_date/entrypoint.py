@@ -34,7 +34,6 @@ def generate(client, parameters, progress_callback):
     total = requests.count()
 
     for request in requests:
-        connection = request['asset']['connection']
         reconciliation_param_value = ''
 
         for param in request['asset']['params']:
