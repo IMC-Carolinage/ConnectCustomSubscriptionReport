@@ -46,7 +46,7 @@ def test_subscriptions_by_creation_date(progress, client_factory, response_facto
 
     result = list(generate(client, parameters, progress))
 
-    assert len(result) == 18
+    assert len(result) == 3
 
 
 def test_generate_additional(progress, client_factory, response_factory, ff_request):
@@ -91,4 +91,4 @@ def test_generate_additional(progress, client_factory, response_factory, ff_requ
 
     result = list(generate(client, parameters, progress))
 
-    assert len(result) == 18
+    assert len(result) == 3
