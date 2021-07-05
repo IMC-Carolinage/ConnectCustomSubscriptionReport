@@ -30,7 +30,8 @@ def test_ppu_subscriptions_by_product_month(progress, client_factory, response_f
     responses.append(
         response_factory(
             query='and(in(status,(active,suspended)),in(connection.type,(production)),'
-                  'le(events.created.at,' + get_last_day_last_month() + '))',
+                  'le(events.created.at,'
+                  + get_last_day_last_month().strftime('%Y-%m-%dT00:00:00') + '))',
             value=[ff_ppu],
         ),
     )
