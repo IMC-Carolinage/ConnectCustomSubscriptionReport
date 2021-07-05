@@ -15,7 +15,7 @@
             "provider",
             "vendor"
          ],
-         "report_spec":"1",
+         "report_spec":"2",
          "parameters":[
             {
                "id":"date",
@@ -110,9 +110,10 @@
          "start_col":1,
          "entrypoint":"subscription_report.ppu_subscriptions_by_product_month.entrypoint.generate",
          "audience":[
+            "provider",
             "vendor"
          ],
-         "report_spec":"1",
+         "report_spec":"2",
          "parameters":[
             {
                "id":"product",
