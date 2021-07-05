@@ -5,6 +5,7 @@
 #
 
 from subscription_report.ppu_subscriptions_by_product_month.entrypoint import generate
+from subscription_report.ppu_subscriptions_by_product_month.utils import get_last_day_last_month
 
 
 def test_ppu_subscriptions_by_product_month(progress, client_factory, response_factory, ff_ppu):
@@ -29,7 +30,7 @@ def test_ppu_subscriptions_by_product_month(progress, client_factory, response_f
     responses.append(
         response_factory(
             query='and(in(status,(active,suspended)),in(connection.type,(production)),'
-                  'le(events.created.at,2020-01-01T00:00:00))',
+                  'le(events.created.at,'+ get_last_day_last_month() +'))',
             value=[ff_ppu],
         ),
     )
@@ -65,7 +66,7 @@ def test_generate_additional(progress, client_factory, response_factory, ff_ppu)
     responses.append(
         response_factory(
             query='and(in(status,(active,suspended)),in(connection.type,(production)),'
-                  'le(events.created.at,2020-01-01T00:00:00),'
+                  'le(events.created.at,'+ get_last_day_last_month() +'),'
                   'in(product.id,(PRD-276-377-545)),in(marketplace.id,(MP-91673)))',
             value=[ff_ppu],
         ),
