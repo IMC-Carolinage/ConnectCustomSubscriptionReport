@@ -122,6 +122,13 @@
                "required":true
             },
             {
+               "id":"parameter_id",
+               "type":"single_line",
+               "name":"Parameter Id",
+               "description":"Select the parameter id configured for reconciliation",
+               "required":true
+            },
+            {
                "id":"mkp",
                "type":"marketplace",
                "name":"Marketplaces",
