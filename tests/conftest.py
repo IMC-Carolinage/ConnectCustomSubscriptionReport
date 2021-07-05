@@ -149,3 +149,15 @@ def ff_request():
             ),
     ) as request:
         return json.load(request)
+
+
+@pytest.fixture
+def ff_request_ppu():
+    with open(
+            os.path.join(
+                os.getcwd(),
+                'tests',
+                'ff_request_ppu.json',
+            ),
+    ) as request:
+        return json.load(request)
