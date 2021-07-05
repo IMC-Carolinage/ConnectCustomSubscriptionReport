@@ -16,7 +16,7 @@ def test_ppu_subscriptions_by_product_month(progress, client_factory, response_f
             "all": True,
             "choices": [],
         },
-        "parameter_id":"t0_f_text",
+        "parameter_id": "t0_f_text",
         "mkp": {
             "all": True,
             "choices": [],
@@ -54,7 +54,7 @@ def test_generate_additional(progress, client_factory, response_factory, ff_ppu)
                 "PRD-276-377-545",
             ],
         },
-        "parameter_id":"t0_f_text",
+        "parameter_id": "t0_f_text",
         "mkp": {
             "all": False,
             "choices": ['MP-91673'],
