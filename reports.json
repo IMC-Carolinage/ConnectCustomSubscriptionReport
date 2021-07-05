@@ -101,6 +101,34 @@
                "description":"Select the marketplaces you want to include in the report"
             }
          ]
+      },
+      {
+         "name":"PAYG Subscriptions active the last month by product and Marketplace",
+         "readme_file":"subscription_report/ppu_subscriptions_by_product_month/Readme.md",
+         "template":"subscription_report/ppu_subscriptions_by_product_month/template.xlsx",
+         "start_row":2,
+         "start_col":1,
+         "entrypoint":"subscription_report.ppu_subscriptions_by_product_month.entrypoint.generate",
+         "audience":[
+            "vendor"
+         ],
+         "report_spec":"1",
+         "parameters":[
+            {
+               "id":"product",
+               "type":"product",
+               "name":"Product list",
+               "description":"Select the products you want to include in the report",
+               "required":true
+            },
+            {
+               "id":"mkp",
+               "type":"marketplace",
+               "name":"Marketplaces",
+               "required":true,
+               "description":"Select the marketplaces you want to include in the report"
+            }
+         ]
       }
    ]
 }
