@@ -67,7 +67,8 @@ def test_generate_additional(progress, client_factory, response_factory, ff_ppu)
     responses.append(
         response_factory(
             query='and(in(status,(active,suspended)),in(connection.type,(production)),'
-                  'le(events.created.at,' + get_last_day_last_month() + '),'
+                  'le(events.created.at,'
+                  + get_last_day_last_month().strftime('%Y-%m-%dT00:00:00') + '),'
                   'in(product.id,(PRD-276-377-545)),in(marketplace.id,(MP-91673)))',
             value=[ff_ppu],
         ),
