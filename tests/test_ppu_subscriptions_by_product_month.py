@@ -28,8 +28,8 @@ def test_ppu_subscriptions_by_product_month(progress, client_factory, response_f
 
     responses.append(
         response_factory(
-            query='and(ge(created,2021-01-01T00:00:00),le(created,2021-12-01T00:00:00),in(status,'
-                  '(tiers_setup,inquiring,pending,approved,failed,draft)))',
+            query='and(in(status,(active,suspended)),in(connection.type,(production)),'
+                  'le(events.created.at,2020-01-01T00:00:00))',
             value=[ff_ppu],
         ),
     )
@@ -64,9 +64,9 @@ def test_generate_additional(progress, client_factory, response_factory, ff_ppu)
 
     responses.append(
         response_factory(
-            query='and(ge(created,2021-01-01T00:00:00),le(created,2021-12-01T00:00:00),'
-                  'in(asset.product.id,(PRD-276-377-545)),in(status,'
-                  '(approved)),in(asset.marketplace.id,(MP-91673)))',
+            query='and(in(status,(active,suspended)),in(connection.type,(production)),'
+                  'le(events.created.at,2020-01-01T00:00:00),'
+                  'in(product.id,(PRD-276-377-545)),in(marketplace.id,(MP-91673)))',
             value=[ff_ppu],
         ),
     )
