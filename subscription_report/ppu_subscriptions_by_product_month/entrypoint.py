@@ -52,7 +52,8 @@ def generate(client, parameters, progress_callback):
                 if get_basic_value(param, 'id') == parameters['parameter_id']:
                     reconciliation_param = get_basic_value(param, 'value')
 
-            record_note = '#' + reconciliation_param + ' - ' + description + " - " + last_month_period_str()
+            record_note = '#' + reconciliation_param + ' - ' + description +\
+                          " - " + last_month_period_str()
             yield (
                 now_str(),
                 record_note,
@@ -63,7 +64,7 @@ def generate(client, parameters, progress_callback):
                 get_first_day_last_month().strftime('%Y-%m-%d %H:%M:%S'),
                 get_last_day_last_month().strftime('%Y-%m-%d %H:%M:%S'),
                 'parameter.' + parameters['parameter_id'],
-                reconciliation_param
+                reconciliation_param,
             )
         progress += 1
         progress_callback(progress, total)
