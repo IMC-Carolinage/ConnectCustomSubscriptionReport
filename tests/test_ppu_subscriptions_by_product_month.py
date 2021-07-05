@@ -5,9 +5,10 @@
 #
 
 from subscription_report.ppu_subscriptions_by_product_month.entrypoint import generate
+from subscription_report.ppu_subscriptions_by_product_month.utils import get_last_day_last_month
 
 
-def test_ppu_subscriptions_by_product_month(progress, client_factory, response_factory, ff_request_ppu):
+def test_ppu_subscriptions_by_product_month(progress, client_factory, response_factory, ff_ppu):
     responses = []
 
     parameters = {
@@ -15,6 +16,7 @@ def test_ppu_subscriptions_by_product_month(progress, client_factory, response_f
             "all": True,
             "choices": [],
         },
+        "parameter_id": "t0_f_text",
         "mkp": {
             "all": True,
             "choices": [],
@@ -28,9 +30,10 @@ def test_ppu_subscriptions_by_product_month(progress, client_factory, response_f
 
     responses.append(
         response_factory(
-            query='and(ge(created,2021-01-01T00:00:00),le(created,2021-12-01T00:00:00),in(status,'
-                  '(tiers_setup,inquiring,pending,approved,failed,draft)))',
-            value=[ff_request_ppu],
+            query='and(in(status,(active,suspended)),in(connection.type,(production)),'
+                  'le(events.created.at,'
+                  + get_last_day_last_month().strftime('%Y-%m-%dT00:00:00') + '))',
+            value=[ff_ppu],
         ),
     )
 
@@ -41,7 +44,7 @@ def test_ppu_subscriptions_by_product_month(progress, client_factory, response_f
     assert len(result) == 1
 
 
-def test_generate_additional(progress, client_factory, response_factory, ff_request):
+def test_generate_additional(progress, client_factory, response_factory, ff_ppu):
     responses = []
 
     parameters = {
@@ -51,6 +54,7 @@ def test_generate_additional(progress, client_factory, response_factory, ff_requ
                 "PRD-276-377-545",
             ],
         },
+        "parameter_id": "t0_f_text",
         "mkp": {
             "all": False,
             "choices": ['MP-91673'],
@@ -64,10 +68,11 @@ def test_generate_additional(progress, client_factory, response_factory, ff_requ
 
     responses.append(
         response_factory(
-            query='and(ge(created,2021-01-01T00:00:00),le(created,2021-12-01T00:00:00),'
-                  'in(asset.product.id,(PRD-276-377-545)),in(status,'
-                  '(approved)),in(asset.marketplace.id,(MP-91673)))',
-            value=[ff_request_ppu],
+            query='and(in(status,(active,suspended)),in(connection.type,(production)),'
+                  'le(events.created.at,'
+                  + get_last_day_last_month().strftime('%Y-%m-%dT00:00:00') + '),'
+                  'in(product.id,(PRD-276-377-545)),in(marketplace.id,(MP-91673)))',
+            value=[ff_ppu],
         ),
     )
 

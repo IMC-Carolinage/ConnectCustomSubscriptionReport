@@ -36,12 +36,12 @@ def generate(client, parameters, progress_callback):
 
     for request in requests:
         is_ppu_subscription = False
-        license_key = ''
+        reconciliation_param = ''
         description = ''
         mpn = ''
         for item in request['items']:
-            if get_basic_value(item, 'quantity') == 'unlimited' \
-                    and get_basic_value(item, 'item_type') == 'PPU':
+            if (get_basic_value(item, 'quantity') == 'unlimited'
+                    and get_basic_value(item, 'item_type') == 'PPU'):
                 is_ppu_subscription = True
                 description = get_basic_value(item, 'display_name')
                 mpn = get_basic_value(item, 'mpn')
@@ -49,10 +49,11 @@ def generate(client, parameters, progress_callback):
 
         if is_ppu_subscription:
             for param in request['params']:
-                if get_basic_value(param, 'id') == 'License_Key':
-                    license_key = get_basic_value(param, 'value')
+                if get_basic_value(param, 'id') == parameters['parameter_id']:
+                    reconciliation_param = get_basic_value(param, 'value')
 
-            record_note = '#' + license_key + ' - ' + description + " - " + last_month_period_str()
+            record_note = '#' + reconciliation_param + ' - ' + description
+            record_note = record_note + ' - ' + last_month_period_str()
             yield (
                 now_str(),
                 record_note,
@@ -62,8 +63,8 @@ def generate(client, parameters, progress_callback):
                 0,
                 get_first_day_last_month().strftime('%Y-%m-%d %H:%M:%S'),
                 get_last_day_last_month().strftime('%Y-%m-%d %H:%M:%S'),
-                'parameter.License_Key',
-                license_key
+                'parameter.' + parameters['parameter_id'],
+                reconciliation_param,
             )
         progress += 1
         progress_callback(progress, total)
