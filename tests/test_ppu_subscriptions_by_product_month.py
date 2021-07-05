@@ -7,7 +7,7 @@
 from subscription_report.ppu_subscriptions_by_product_month.entrypoint import generate
 
 
-def test_ppu_subscriptions_by_product_month(progress, client_factory, response_factory, ff_request_ppu):
+def test_ppu_subscriptions_by_product_month(progress, client_factory, res_factory, ff_request_ppu):
     responses = []
 
     parameters = {
@@ -27,7 +27,7 @@ def test_ppu_subscriptions_by_product_month(progress, client_factory, response_f
     )
 
     responses.append(
-        response_factory(
+        res_factory(
             query='and(ge(created,2021-01-01T00:00:00),le(created,2021-12-01T00:00:00),in(status,'
                   '(tiers_setup,inquiring,pending,approved,failed,draft)))',
             value=[ff_request_ppu],
@@ -41,7 +41,7 @@ def test_ppu_subscriptions_by_product_month(progress, client_factory, response_f
     assert len(result) == 1
 
 
-def test_generate_additional(progress, client_factory, response_factory, ff_request):
+def test_generate_additional(progress, client_factory, response_factory, ff_request_ppu):
     responses = []
 
     parameters = {

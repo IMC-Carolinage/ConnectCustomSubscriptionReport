@@ -17,4 +17,6 @@ def get_last_day_last_month():
 
 
 def last_month_period_str():
-    return get_first_day_last_month().strftime('%m/%d/%Y') + "-" + get_last_day_last_month().strftime('%m/%d/%Y')
+    value = get_first_day_last_month().strftime('%m/%d/%Y')
+    value = value + "-" + get_last_day_last_month().strftime('%m/%d/%Y')
+    return value

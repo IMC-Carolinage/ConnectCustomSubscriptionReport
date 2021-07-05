@@ -40,8 +40,8 @@ def generate(client, parameters, progress_callback):
         description = ''
         mpn = ''
         for item in request['items']:
-            if get_basic_value(item, 'quantity') == 'unlimited' \
-                    and get_basic_value(item, 'item_type') == 'PPU':
+            if (get_basic_value(item, 'quantity') == 'unlimited'
+                    and get_basic_value(item, 'item_type') == 'PPU'):
                 is_ppu_subscription = True
                 description = get_basic_value(item, 'display_name')
                 mpn = get_basic_value(item, 'mpn')
@@ -52,8 +52,8 @@ def generate(client, parameters, progress_callback):
                 if get_basic_value(param, 'id') == parameters['parameter_id']:
                     reconciliation_param = get_basic_value(param, 'value')
 
-            record_note = '#' + reconciliation_param + ' - ' + description +\
-                          " - " + last_month_period_str()
+            record_note = '#' + reconciliation_param + ' - ' + description
+            record_note = record_note + ' - ' + last_month_period_str()
             yield (
                 now_str(),
                 record_note,
