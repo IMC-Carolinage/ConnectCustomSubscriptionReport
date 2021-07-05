@@ -152,7 +152,7 @@ def ff_request():
 
 
 @pytest.fixture
-def ff_request_ppu():
+def ff_ppu():
     with open(
             os.path.join(
                 os.getcwd(),
