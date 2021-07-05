@@ -21,7 +21,7 @@ def test_ppu_subscriptions_by_product_month(progress, client_factory, res_factor
         },
     }
     responses.append(
-        response_factory(
+        res_factory(
             count=1,
         ),
     )
