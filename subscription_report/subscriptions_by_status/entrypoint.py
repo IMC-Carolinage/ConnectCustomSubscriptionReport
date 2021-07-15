@@ -38,7 +38,7 @@ def generate(client, parameters, progress_callback):
         for item in _get_items(client, subscription_id):
             if (get_basic_value(item, 'item_type') != 'PPU'
                     and get_basic_value(item, 'quantity') != '0'
-                    and get_basic_value(item, 'display_name').__contains__('- Reference') == False):
+                    and get_basic_value(item, 'display_name').__contains__('- Reference') is False):
                 yield (
                     get_basic_value(subscription, 'id'),
                     get_basic_value(subscription, 'external_id'),
