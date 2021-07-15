@@ -137,6 +137,75 @@
                "description":"Select the marketplaces you want to include in the report"
             }
          ]
+      },
+      {
+         "name":"Subscriptions per Product, Marketplace and Status",
+         "readme_file":"subscription_report/subscriptions_by_status/Readme.md",
+         "template":"subscription_report/subscriptions_by_status/template.xlsx",
+         "start_row":2,
+         "start_col":1,
+         "entrypoint":"subscription_report.subscriptions_by_status.entrypoint.generate",
+         "audience":[
+            "provider",
+            "vendor"
+         ],
+         "report_spec":"1",
+         "parameters":[
+            {
+               "id":"date",
+               "type":"date_range",
+               "name":"Report period",
+               "description":"Provide the subscriptions updated date period for the report",
+               "required":true
+            },
+            {
+               "id":"product",
+               "type":"product",
+               "name":"Product list",
+               "description":"Select the products you want to include in the report",
+               "required":true
+            },
+            {
+               "id":"mkp",
+               "type":"marketplace",
+               "name":"Marketplaces",
+               "required":true,
+               "description":"Select the marketplaces you want to include in the report"
+            },
+            {
+               "id":"as_status",
+               "type":"checkbox",
+               "name":"Subscription status",
+               "description":"Select the status of the subscriptions you want to include in the report",
+               "required":true,
+               "choices":[
+                  {
+                     "value":"active",
+                     "label":"Active"
+                  },
+                  {
+                     "value":"draft",
+                     "label":"Draft"
+                  },
+                  {
+                     "value":"processing",
+                     "label":"Processing"
+                  },
+                  {
+                     "value":"suspended",
+                     "label":"Suspended"
+                  },
+                  {
+                     "value":"terminating",
+                     "label":"Terminating"
+                  },
+                  {
+                     "value":"terminated",
+                     "label":"Terminated"
+                  }
+               ]
+            }
+         ]
       }
    ]
 }

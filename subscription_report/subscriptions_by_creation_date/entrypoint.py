@@ -4,7 +4,7 @@
 # All rights reserved.
 #
 
-from cnct import R
+from connect.client.rql.base import R
 from .utils import convert_to_datetime, get_basic_value, get_value, today_str
 
 
