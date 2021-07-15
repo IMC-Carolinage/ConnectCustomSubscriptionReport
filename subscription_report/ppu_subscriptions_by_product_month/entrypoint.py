@@ -4,7 +4,7 @@
 # All rights reserved.
 #
 
-from connect.client.rql.base import R
+from cnct import R
 from subscription_report.subscriptions_by_creation_date.utils import get_basic_value
 from .utils import now_str, last_month_period_str, get_first_day_last_month, get_last_day_last_month
 
