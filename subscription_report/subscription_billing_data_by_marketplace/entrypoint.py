@@ -6,7 +6,8 @@
 
 from cnct import R
 from subscription_report.subscriptions_by_status.utils import convert_to_datetime, get_basic_value, get_value, today_str
-from subscription_report.ppu_subscriptions_by_product_month.utils import get_last_day_last_month, get_first_day_last_month
+from subscription_report.ppu_subscriptions_by_product_month.utils import get_last_day_last_month, \
+    get_first_day_last_month
 
 
 def generate(client, parameters, progress_callback):
@@ -33,31 +34,31 @@ def generate(client, parameters, progress_callback):
 
     progress = 0
     total = susbcriptions.count()
-    start = ''
-    end = ''
 
     for subscription in susbcriptions:
         end = ''
         start = ''
-        price_list_version = ''
         requests = _get_requests(client, get_basic_value(subscription, 'id'))
 
         for request in requests:
             if request['type'] == 'purchase':
                 start = convert_to_datetime(get_basic_value(request, 'effective_date'))
-            if request['type'] == 'cancel':
+            if request['type'] == 'cancel' or request['type'] == 'suspend':
                 end = convert_to_datetime(get_basic_value(request, 'effective_date'))
-                price_list_version = _get_price_list_version_id(client, request['asset']['product']['id'],
-                                                                request['asset']['marketplace']['id'])
 
         if end != '' and end < get_first_day_last_month():
             continue
 
+        price_list_version = _get_price_list_version_id(client, subscription['product']['id'],
+                                                        subscription['marketplace']['id'])
+
         for item in _get_items(client, subscription['id']):
-            price = ''
+            price = 0
             if item['quantity'].isdigit() and int(item['quantity']) > 0:
                 if len(price_list_version) > 0:
                     price = _get_price(client, price_list_version, item['id'])
+            else:
+                continue
 
             yield (
                 get_basic_value(subscription, 'id'),  # Subscription ID
@@ -67,7 +68,7 @@ def generate(client, parameters, progress_callback):
                 get_basic_value(item, 'period'),  # Item Period
                 get_basic_value(item, 'quantity'),  # Quantity
                 price,  # Unit Cost
-                round(float(price)*float(get_basic_value(item, 'quantity')), 2),  # Total Cost
+                round(float(price) * float(get_basic_value(item, 'quantity')), 2),  # Total Cost
                 get_value(subscription['tiers'], 'customer', 'id'),  # Customer ID
                 get_value(subscription['tiers'], 'customer', 'name'),  # Customer Name
                 get_value(subscription['tiers'], 'customer', 'external_id'),  # Customer External ID
@@ -135,14 +136,14 @@ def _get_price_list_version_id(client, product_id, marketplace_id):
     listings = client.listings.filter(query)
     # TODO: SI no tiene pricelist el listing falla esta instrucción
     if listings.count() > 0 and 'pricelist' in listings.first():
-            price_list_id = listings.first()['pricelist']['id']
-            query = R()
-            query &= R().pricelist.id.oneof([price_list_id])
-            query &= R().status.oneof(['active'])
+        price_list_id = listings.first()['pricelist']['id']
+        query = R()
+        query &= R().pricelist.id.oneof([price_list_id])
+        query &= R().status.oneof(['active'])
 
-            versions = client('pricing').versions.filter(query)
-            if versions.count() > 0:
-                return versions[0]['id']
+        versions = client('pricing').versions.filter(query)
+        if versions.count() > 0:
+            return versions[0]['id']
 
     return ''
 
@@ -157,4 +158,3 @@ def _get_price(client, version_id, item_global_id):
     if att_list.count() > 0:
         return att_list.first()['attributes']['price']
     return item_global_id
-
