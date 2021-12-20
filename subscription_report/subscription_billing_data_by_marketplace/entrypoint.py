@@ -6,8 +6,7 @@
 
 from cnct import R
 from subscription_report.subscriptions_by_status.utils import convert_to_datetime, get_basic_value, get_value, today_str
-from subscription_report.ppu_subscriptions_by_product_month.utils import get_last_day_last_month, \
-    get_first_day_last_month
+from subscription_report.ppu_subscriptions_by_product_month.utils import get_last_day_last_month, get_first_day_last_month
 
 
 def generate(client, parameters, progress_callback):
