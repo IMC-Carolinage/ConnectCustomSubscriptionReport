@@ -1,10 +1,13 @@
-# Welcome to SubscriptionsReportByCreationDate !
+# Welcome to Connect Custom Subscription Reports !
 
 
-Report with the details of all subscriptions created from a given date
+With Connect Custom Subscription Reports you will be able to create the following reports:
+* Pay-as-you-go Subscriptions Report by Product and Marketplace
+* Subscriptions details by requests creation date
+* Subscriptions by Product, Marketplace, and Status
 
 
 
 ## License
 
-**SubscriptionsReportByCreationDate** is licensed under the *Apache Software License 2.0* license.
+**Connect Custom Subscription Reports** is licensed under the *Apache Software License 2.0* license.
