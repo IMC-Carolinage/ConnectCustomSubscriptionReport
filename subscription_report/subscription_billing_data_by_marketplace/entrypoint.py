@@ -156,4 +156,4 @@ def _get_price(client, version_id, item_global_id):
     att_list = client('pricing').versions[version_id].points.filter(query)
     if att_list.count() > 0:
         return att_list.first()['attributes']['price']
-    return item_global_id
+    return 0
