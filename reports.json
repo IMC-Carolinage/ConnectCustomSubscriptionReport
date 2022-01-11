@@ -206,35 +206,6 @@
                ]
             }
          ]
-      },
-      {
-         "name":"Subscription Billing Data per Month, Product, Marketplace and Status",
-         "readme_file":"subscription_report/subscription_billing_data_by_marketplace/Readme.md",
-         "template":"subscription_report/subscription_billing_data_by_marketplace/template.xlsx",
-         "start_row":2,
-         "start_col":1,
-         "entrypoint":"subscription_report.subscription_billing_data_by_marketplace.entrypoint.generate",
-         "audience":[
-            "provider",
-            "vendor"
-         ],
-         "report_spec":"1",
-         "parameters":[
-            {
-               "id":"product",
-               "type":"product",
-               "name":"Product list",
-               "description":"Select the products you want to include in the report",
-               "required":true
-            },
-            {
-               "id":"mkp",
-               "type":"marketplace",
-               "name":"Marketplaces",
-               "required":true,
-               "description":"Select the marketplaces you want to include in the report"
-            }
-         ]
       }
    ]
 }
